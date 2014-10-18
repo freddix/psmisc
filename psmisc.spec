@@ -1,11 +1,12 @@
 Summary:	Utilities for managing processes on your system
 Name:		psmisc
-Version:	22.15
-Release:	2
+Version:	22.21
+Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://download.sourceforge.net/psmisc/%{name}-%{version}.tar.gz
-# Source0-md5:	35e155bae2e499a6dcba35884560db1e
+# Source0-md5:	935c0fd6eb208288262b385fa656f1bf
+Patch0:		%{name}-fuser.patch
 URL:		http://psmisc.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -23,13 +24,13 @@ processes that are using specified files or filesystems.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__aclocal} -I m4
 %{__automake}
 %{__autoheader}
 %{__autoconf}
-CFLAGS="%{rpmcflags} -D_GNU_SOURCE -I/usr/include/ncurses"
 %configure
 %{__make}
 
